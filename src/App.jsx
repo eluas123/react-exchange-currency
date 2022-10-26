@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import AppExchange from './comps/appExchange';
@@ -17,32 +18,25 @@ function App(props) {
 
 
   const doApi = async() =>{
-    let url = "/money.json";
-    let resp = await fetch(url);
-    let data = await resp.json();
-    let tempObj = data.quotes;
+    let url = 'https://api.currencyapi.com/v2/latest?apikey=f2dce500-45f0-11ec-9860-7954a32a920b';
+    let resp = await axios.get(url);
+    let currencys = resp.data;
     let temp_ar = [];
-    for(let key in tempObj){
+    for(const key in currencys.data){
       temp_ar.push({
-        label:key.slice(3),
-        value:tempObj[key]
+        label:key,
+        value:currencys.data[key],
       })
     }
-    console.log(temp_ar)
+    console.log("data",temp_ar)
     setOptions(temp_ar);
-
-    let usd = temp_ar[0];
-    let ils = temp_ar[1];
-
-    setValue1(usd);
-    setValue2(ils);
-
-
-  console.log(value1);
-  console.log(value2);
-
+    let USD = temp_ar[157];
+    let ILS = temp_ar[69];
+    setValue1(USD);
+    setValue2(ILS);
   }
-
+  console.log("dolla",value1);
+  console.log("shekel",value2);
   return (
     <div className="container">
       <AppContext.Provider value={{

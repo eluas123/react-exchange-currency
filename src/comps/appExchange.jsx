@@ -6,9 +6,11 @@ import { BsCurrencyBitcoin, BsCurrencyDollar, BsCurrencyEuro, BsArrowLeftRight }
 import DateTime from './dateTime';
 import { AppContext } from '../context/context';
 
+
 export default function AppExchange() {
 
   const{value1, value2, setValue1, setValue2, input, options} = useContext(AppContext);
+
 
   return (
     <React.Fragment>
